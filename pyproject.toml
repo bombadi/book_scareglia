@@ -1,0 +1,18 @@
+[project]
+name = "book-scareglia"
+version = "0.1.0"
+description = "Ferienhaus booking assistant built with Streamlit."
+requires-python = ">=3.14"
+dependencies = [
+    "bcrypt>=5.0.0",
+    "google-api-python-client>=2.195.0",
+    "google-auth>=2.49.2",
+    "gspread>=6.2.1",
+    "openai>=2.33.0",
+    "python-dotenv>=1.2.1",
+    "requests>=2.33.1",
+    "streamlit>=1.57.0",
+    "streamlit-authenticator>=0.4.2",
+    "streamlit-autorefresh>=1.0.1",
+    "streamlit-calendar>=1.4.0",
+]

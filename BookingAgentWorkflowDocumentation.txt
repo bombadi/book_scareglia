@@ -1,0 +1,405 @@
+CAS-Präsentation: KI-Buchungsagent für ein Ferienhaus
+
+Titel:
+Vom Chatbot zum agentischen Buchungsassistenten
+Ein KI-Agent für Ferienhaus-Buchungen, Reiseinformationen und Aktivitäten
+
+
+------------------------------------------------------------
+1. Motivation
+Dauer: ca. 1 Minute
+------------------------------------------------------------
+
+Warum ein Buchungsagent?
+
+Die Buchung eines Ferienhauses wirkt auf den ersten Blick einfach:
+Man wählt ein Datum, prüft die Verfügbarkeit und bestätigt die Reservation.
+
+In der Praxis besteht dieser Ablauf aber aus mehreren Teilschritten:
+- Ist der gewünschte Zeitraum frei?
+- Gibt es Überschneidungen mit bestehenden Buchungen?
+- Wer reist mit?
+- Müssen zusätzliche Informationen gespeichert werden?
+- Soll der Gast Reiseinformationen erhalten?
+- Welche Aktivitäten sind vor Ort sinnvoll?
+
+Genau hier setzt der Buchungsagent an.
+
+Ziel des Projekts
+
+Das Ziel meines Projekts ist es, einen KI-gestützten Agenten zu entwickeln, der nicht nur Fragen beantwortet, sondern konkrete Aufgaben im Buchungskontext ausführt.
+
+Der Agent soll Benutzerinnen und Benutzer dabei unterstützen:
+- Verfügbarkeiten zu prüfen
+- Buchungen vorzubereiten oder zu erstellen
+- bestehende Buchungen anzuzeigen
+- Stornierbarkeit zu prüfen
+- Reiseinformationen bereitzustellen
+- Aktivitäten in der Umgebung vorzuschlagen
+
+Abgrenzung zu einem klassischen Chatbot
+
+Ein klassischer Chatbot reagiert hauptsächlich auf Texteingaben.
+Er gibt Antworten, bleibt aber oft passiv.
+
+Ein agentischer Buchungsassistent geht einen Schritt weiter:
+Er versteht das Ziel des Benutzers, plant mehrere Schritte und nutzt bei Bedarf verschiedene Werkzeuge.
+
+Beispiel:
+Ein Chatbot sagt:
+"Bitte prüfen Sie den Kalender."
+
+Ein Buchungsagent sagt:
+"Ich prüfe den Kalender, kontrolliere die Verfügbarkeit und bereite die Buchung zur Bestätigung vor."
+
+Interaktive Frage ans Publikum:
+
+Welche Aufgaben erwarten Sie von einem KI-Buchungsagenten?
+
+
+------------------------------------------------------------
+2. Projektübersicht
+Dauer: ca. 1 Minute
+------------------------------------------------------------
+
+Kurzvorstellung des Ferienhaus-Systems
+
+Das Projekt ist ein digitales Buchungssystem für ein Ferienhaus in Scareglia.
+Benutzerinnen und Benutzer können über eine Oberfläche mit einem KI-Agenten interagieren und ihre Anliegen in natürlicher Sprache formulieren.
+
+Der Agent verbindet eine Chat-Interaktion mit konkreten Funktionen des Buchungssystems.
+
+Hauptfunktionen
+
+1. Verfügbarkeit prüfen
+Der Agent kann prüfen, ob das Ferienhaus in einem bestimmten Zeitraum frei ist.
+
+2. Buchung erstellen oder vorbereiten
+Wenn der Zeitraum verfügbar ist, kann der Agent eine Buchung vorbereiten und dem Benutzer zur Bestätigung anzeigen.
+
+3. Buchung ändern oder stornieren
+Der Agent kann bestehende Buchungen anzeigen und prüfen, ob eine Stornierung möglich ist.
+
+4. Reiseinformationen recherchieren
+Der Agent kann Informationen zur Anreise bereitstellen, zum Beispiel durch einen Fahrplanlink.
+
+5. Aktivitäten vorschlagen
+Für den Aufenthalt kann ein Region-Report erstellt werden, der Tipps, Aktivitäten und Informationen zur Umgebung enthält.
+
+Kernidee:
+Der Benutzer muss nicht wissen, welche Funktion er aufrufen muss.
+Er beschreibt sein Ziel — der Agent entscheidet, welche Schritte notwendig sind.
+
+
+------------------------------------------------------------
+3. Agentische Architektur
+Dauer: ca. 2 Minuten
+------------------------------------------------------------
+
+Grafik:
+
+Benutzer
+    │
+    ▼
+Booking Agent
+    │
+    ▼
+Agentic Workflow
+    │
+    ├─ Buchungssystem
+    ├─ Kalender
+    ├─ Reisedaten / Fahrplan
+    ├─ Region-Report
+    └─ Aktivitäten
+
+Erklärung der Architektur
+
+Im Zentrum steht der Booking Agent.
+Er nimmt die Anfrage des Benutzers entgegen und interpretiert sie mit Hilfe eines Large Language Models.
+
+Das LLM ist dabei nicht nur ein Textgenerator, sondern übernimmt die Rolle einer Entscheidungsinstanz.
+
+Es entscheidet:
+- Was möchte der Benutzer erreichen?
+- Welche Informationen fehlen noch?
+- Welches Tool muss verwendet werden?
+- In welcher Reihenfolge müssen die Schritte ausgeführt werden?
+- Wann braucht es eine Bestätigung durch den Benutzer?
+
+Tools werden je nach Aufgabe aufgerufen
+
+Der Agent verfügt über verschiedene Werkzeuge, zum Beispiel:
+- Verfügbarkeitsprüfung
+- Buchungsvorbereitung
+- Buchungserstellung
+- Kalenderanzeige
+- Stornierungsprüfung
+- Reiseinformations-Tool
+- Region-Report für Aktivitäten und Tipps
+
+Diese Tools sind spezialisierte Funktionen.
+Der Agent entscheidet dynamisch, welches Werkzeug in einer bestimmten Situation passend ist.
+
+Ergebnisse werden zusammengeführt
+
+Die Resultate der Tools werden nicht isoliert angezeigt.
+Der Agent fasst sie für den Benutzer verständlich zusammen.
+
+Beispiel:
+Wenn die Verfügbarkeitsprüfung erfolgreich ist, kann der Agent im nächsten Schritt direkt die Buchung vorbereiten.
+Wenn der Zeitraum nicht verfügbar ist, kann er Alternativen vorschlagen oder nach einem anderen Zeitraum fragen.
+
+Wichtig:
+Die agentische Architektur trennt Denken und Handeln.
+Das LLM plant und entscheidet.
+Die Tools führen konkrete Aktionen aus.
+
+
+------------------------------------------------------------
+4. Beispiel eines Agentic Workflows
+Dauer: ca. 2 Minuten
+------------------------------------------------------------
+
+Beispielauftrag:
+
+"Buche das Ferienhaus vom 10. bis 15. August."
+
+Möglicher Ablauf:
+
+Benutzeranfrage
+    ↓
+Datum interpretieren
+    ↓
+Kalender / Verfügbarkeit prüfen
+    ↓
+Konflikte erkennen oder freien Zeitraum bestätigen
+    ↓
+Gästedaten prüfen
+    ↓
+Buchung vorbereiten
+    ↓
+Bestätigung durch Benutzer einholen
+    ↓
+Buchung speichern
+    ↓
+Bestätigung ausgeben
+
+Erklärung
+
+Der entscheidende Punkt ist:
+Der Benutzer gibt nur ein Ziel an.
+
+Er sagt nicht:
+1. Prüfe zuerst die Verfügbarkeit.
+2. Suche bestehende Buchungen.
+3. Bereite dann eine neue Buchung vor.
+4. Frage nach der Bestätigung.
+5. Speichere die Buchung.
+
+Diese Schritte plant der Agent selbst.
+
+Damit unterscheidet sich der Agent von einer einfachen Eingabemaske oder einem FAQ-Chatbot.
+
+Beispiel im Detail
+
+Benutzer:
+"Buche das Ferienhaus vom 10. bis 15. August."
+
+Agent:
+1. Erkennt die Absicht: Buchung erstellen
+2. Erkennt den Zeitraum: 10. bis 15. August
+3. Prüft die Verfügbarkeit
+4. Erkennt eventuell fehlende Angaben, zum Beispiel Anzahl Gäste
+5. Fragt gezielt nach
+6. Bereitet die Buchung vor
+7. Holt die Bestätigung ein
+8. Erst danach wird die Buchung verbindlich gespeichert
+
+Warum ist die Bestätigung wichtig?
+
+Nicht jede Aktion sollte vollautomatisch passieren.
+Gerade bei verbindlichen Buchungen ist ein Human-in-the-loop sinnvoll.
+
+Der Agent kann viel vorbereiten, aber kritische Aktionen sollten bestätigt werden.
+
+
+------------------------------------------------------------
+5. Live-Demo
+Dauer: ca. 2–3 Minuten
+------------------------------------------------------------
+
+Demo-Ziel
+
+In der Live-Demo soll gezeigt werden, dass der Agent mehrere Aufgaben miteinander kombinieren kann.
+
+Beispielauftrag:
+
+"Buche das Ferienhaus für zwei Erwachsene und zwei Kinder und schlage drei Aktivitäten in der Umgebung vor."
+
+Möglicher Demo-Ablauf
+
+1. Anfrage eingeben
+Der Benutzer formuliert sein Anliegen in natürlicher Sprache.
+
+2. Agent erkennt mehrere Teilaufgaben
+Der Agent erkennt:
+- Es geht um eine Buchung.
+- Es reisen vier Personen.
+- Es werden zusätzlich Aktivitäten in der Umgebung gewünscht.
+
+3. Fehlende Angaben klären
+Falls der Zeitraum fehlt, fragt der Agent nach:
+"Für welchen Zeitraum möchtest du buchen?"
+
+4. Verfügbarkeit prüfen
+Der Agent kontrolliert, ob das Ferienhaus im gewünschten Zeitraum verfügbar ist.
+
+5. Buchung vorbereiten
+Wenn der Zeitraum frei ist, erstellt der Agent eine Buchungsvorschau.
+
+6. Aktivitäten vorschlagen
+Zusätzlich erstellt der Agent einen Vorschlag mit Aktivitäten in der Region.
+
+7. Ergebnis anzeigen
+Der Benutzer erhält eine verständliche Zusammenfassung:
+- Zeitraum
+- Anzahl Gäste
+- Status der Buchung
+- Aktivitätenvorschläge
+- Nächster Schritt zur Bestätigung
+
+Demo-Sprechtext
+
+In dieser Demo sieht man den Unterschied zwischen einem Chatbot und einem Agenten besonders gut.
+
+Der Agent beantwortet nicht nur eine einzelne Frage.
+Er erkennt ein Ziel, zerlegt dieses Ziel in Teilaufgaben und führt mehrere Schritte mit unterschiedlichen Werkzeugen aus.
+
+Besonders wichtig ist:
+Die Buchung wird nicht einfach blind durchgeführt.
+Der Agent bereitet sie vor und fordert bei einer verbindlichen Aktion eine Bestätigung an.
+
+
+------------------------------------------------------------
+6. Herausforderungen
+Dauer: ca. 1 Minute
+------------------------------------------------------------
+
+1. Tool-Integration
+
+Eine zentrale Herausforderung war die Integration verschiedener Werkzeuge.
+Der Agent muss wissen, wann welches Tool sinnvoll ist und welche Parameter benötigt werden.
+
+Beispiel:
+Für eine Verfügbarkeitsprüfung braucht es ein Startdatum und ein Enddatum.
+Für eine Buchung braucht es zusätzlich Gästedaten.
+
+2. Fehlerbehandlung
+
+In natürlicher Sprache sind Eingaben oft unvollständig oder mehrdeutig.
+
+Beispiele:
+- "Buche nächste Woche."
+- "Ich möchte im Sommer kommen."
+- "Kann ich meine Buchung stornieren?"
+
+Der Agent muss erkennen, welche Informationen fehlen, und gezielt nachfragen.
+
+3. Mehrstufige Workflows
+
+Viele Aufgaben bestehen nicht aus einem einzigen Schritt.
+
+Eine Buchung kann zum Beispiel folgende Schritte enthalten:
+- Datum verstehen
+- Verfügbarkeit prüfen
+- Gastdaten ergänzen
+- Buchung vorbereiten
+- Bestätigung einholen
+- Buchung speichern
+
+Diese Reihenfolge muss zuverlässig eingehalten werden.
+
+4. Zuverlässigkeit der Agenten
+
+Agenten wirken intelligent, können aber Fehler machen.
+Deshalb braucht es klare Grenzen.
+
+Wichtige Massnahmen:
+- verbindliche Aktionen bestätigen lassen
+- Tool-Ergebnisse strukturiert verarbeiten
+- klare Systemregeln definieren
+- Fehler verständlich kommunizieren
+- Benutzer bei Unsicherheiten einbeziehen
+
+Kernaussage:
+Agentische Systeme sind mächtig, aber sie brauchen Kontrolle, Transparenz und sinnvolle Sicherheitsmechanismen.
+
+
+------------------------------------------------------------
+7. Fazit
+Dauer: ca. 30 Sekunden
+------------------------------------------------------------
+
+Agenten können mehrere Werkzeuge kombinieren und dadurch komplexere Aufgaben bearbeiten als klassische Chatbots.
+
+Sie automatisieren nicht nur einzelne Antworten, sondern komplette Abläufe.
+
+Das Projekt zeigt das Potenzial agentischer Workflows anhand eines konkreten und verständlichen Anwendungsfalls:
+einem Ferienhaus-Buchungsagenten.
+
+Der Mehrwert liegt darin, dass Benutzerinnen und Benutzer ihr Ziel in natürlicher Sprache formulieren können.
+Der Agent übernimmt die Planung, ruft passende Werkzeuge auf und führt den Prozess strukturiert weiter.
+
+Schlussgedanke:
+
+Der Agent ersetzt nicht die Kontrolle durch den Menschen.
+Aber er reduziert Aufwand, koordiniert Informationen und macht digitale Prozesse deutlich benutzerfreundlicher.
+
+
+------------------------------------------------------------
+Mögliche Diskussionsfragen
+------------------------------------------------------------
+
+1. Welche weiteren Funktionen wären für einen solchen Agenten sinnvoll?
+
+Mögliche Beispiele:
+- automatische Erinnerungen vor der Reise
+- Packliste je nach Wetter und Saison
+- Reinigung oder Schlüsselübergabe koordinieren
+- automatische E-Mail-Bestätigung
+- Zahlungsabwicklung
+- Empfehlungen basierend auf Interessen der Gäste
+
+2. Welche Aufgaben sollte der Agent autonom erledigen, welche sollten bestätigt werden?
+
+Autonom möglich:
+- Verfügbarkeit prüfen
+- Kalender anzeigen
+- Reiseinformationen suchen
+- Aktivitäten vorschlagen
+- Buchungsdaten vorbereiten
+
+Mit Bestätigung:
+- verbindliche Buchung erstellen
+- Buchung stornieren
+- persönliche Daten ändern
+- kostenpflichtige Leistungen auslösen
+
+3. Wo sehen Sie Grenzen agentischer Systeme?
+
+Mögliche Grenzen:
+- unklare oder widersprüchliche Benutzereingaben
+- falsche oder veraltete externe Informationen
+- Datenschutz und Zugriff auf persönliche Daten
+- Verantwortung bei Fehlbuchungen
+- Vertrauen in automatische Entscheidungen
+- Notwendigkeit von menschlicher Kontrolle bei kritischen Aktionen
+
+
+------------------------------------------------------------
+Optionaler Abschluss-Satz
+------------------------------------------------------------
+
+Mein Projekt zeigt:
+Der spannende Schritt ist nicht nur, dass KI mit uns spricht.
+Der spannende Schritt ist, dass KI mit unseren Systemen zusammenarbeitet und dabei konkrete Aufgaben erledigt.

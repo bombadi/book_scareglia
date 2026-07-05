@@ -1,0 +1,8 @@
+streamlit
+python-dotenv
+gspread
+google-auth
+google-api-python-client
+bcrypt
+streamlit-calendar
+openai

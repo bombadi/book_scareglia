@@ -1,0 +1,9 @@
+booking-agent/.env
+../.venv
+.venv/
+venv/
+__pycache__/
+*.pyc
+.env.*
+booking-agent/bookscareglia-e9509b37b1c4.json
+.idea/
