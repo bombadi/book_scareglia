@@ -119,7 +119,7 @@ def render_future_booking(booking: dict, user: dict) -> None:
                     f"updating_booking_{booking['booking_id']}",
                     False,
                 ),
-                use_container_width=True,
+                width="stretch",
             ):
                 st.session_state["editing_booking"] = booking
                 edit_booking_dialog()
@@ -131,7 +131,7 @@ def render_future_booking(booking: dict, user: dict) -> None:
                 cancellation_action["label"],
                 key=f"cancel_booking_{booking['booking_id']}",
                 disabled=not cancellation_action["allowed"] or is_cancelling,
-                use_container_width=True,
+                width="stretch",
             ):
                 st.session_state["pending_cancellation_booking"] = booking
                 confirm_cancellation_dialog(user=user)

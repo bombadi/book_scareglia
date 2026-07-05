@@ -1,6 +1,5 @@
 import os
-from dotenv import load_dotenv
-load_dotenv()
+
 
 def get_required_env(name: str) -> str:
     value = os.getenv(name)
@@ -16,10 +15,7 @@ def get_optional_env(name: str, default: str = "") -> str:
 
 
 GOOGLE_SHEET_ID = get_required_env("GOOGLE_SHEET_ID")
-GOOGLE_SERVICE_ACCOUNT_FILE = os.getenv(
-    "GOOGLE_SERVICE_ACCOUNT_FILE",
-    "bookscareglia-e9509b37b1c4.json",
-)
+GOOGLE_SERVICE_ACCOUNT_FILE = get_optional_env("GOOGLE_SERVICE_ACCOUNT_FILE")
 
 OPENAI_API_KEY = get_required_env("OPENAI_API_KEY")
 TAVILY_API_KEY = get_optional_env("TAVILY_API_KEY")
