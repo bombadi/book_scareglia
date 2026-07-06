@@ -10,7 +10,6 @@ def get_required_env(name: str) -> str:
 
     return value
 
-
 def get_optional_env(name: str, default: str = "") -> str:
     return os.getenv(name, default).strip()
 
