@@ -22,7 +22,7 @@ def get_gmail_service():
 
     if GOOGLE_SERVICE_ACCOUNT_FILE:
         credentials = Credentials.from_service_account_file(
-        GOOGLE_SERVICE_ACCOUNT_FILE,
+            GOOGLE_SERVICE_ACCOUNT_FILE,
         scopes=GMAIL_SCOPES,
     )
 
@@ -30,7 +30,7 @@ def get_gmail_service():
     else:
         credentials, _ = google.auth.default(scopes=GMAIL_SCOPES)
 
-    return build("gmail", "v1", credentials=delegated_credentials)
+    return build("gmail", "v1", credentials=credentials)
 
 
 def send_email(
