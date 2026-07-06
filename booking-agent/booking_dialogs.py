@@ -57,7 +57,7 @@ def confirm_booking_dialog(user: dict) -> None:
         if st.button(
             "Abbrechen",
             disabled=is_processing,
-            use_container_width=True,
+            width="stretch",
         ):
             st.session_state.pop("pending_booking_request", None)
             st.session_state["active_view"] = "agent"
@@ -68,7 +68,7 @@ def confirm_booking_dialog(user: dict) -> None:
             "Buchung verbindlich erstellen",
             type="primary",
             disabled=is_processing,
-            use_container_width=True,
+            width="stretch",
         ):
             st.session_state[processing_key] = True
 
@@ -169,7 +169,7 @@ def booking_success_dialog() -> None:
             )
         )
 
-    if st.button("OK", type="primary", use_container_width=True):
+    if st.button("OK", type="primary", width="stretch"):
         st.session_state.pop("last_created_booking", None)
         st.session_state.pop("last_booking_email_sent", None)
         st.session_state.pop("last_booking_email_message", None)
@@ -201,7 +201,7 @@ def confirm_cancellation_dialog(user: dict) -> None:
         if st.button(
             "Abbrechen",
             disabled=is_processing,
-            use_container_width=True,
+            width="stretch",
         ):
             st.session_state.pop("pending_cancellation_booking", None)
             st.rerun()
@@ -211,7 +211,7 @@ def confirm_cancellation_dialog(user: dict) -> None:
             "Ja, Buchung stornieren",
             type="primary",
             disabled=is_processing,
-            use_container_width=True,
+            width="stretch",
         ):
             st.session_state[processing_key] = True
 

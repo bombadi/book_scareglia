@@ -36,7 +36,7 @@ def render_booking_list(artifact: dict) -> None:
         st.info("Keine Buchungen gefunden.")
         return
 
-    st.dataframe(data, use_container_width=True)
+    st.dataframe(data, width="stretch")
 
 def render_booking_calendar(artifact: dict) -> None:
     title = artifact.get("title", "Buchungskalender")
@@ -73,14 +73,14 @@ def render_availability_result(artifact: dict) -> None:
                 }
                 for period in periods
             ],
-            use_container_width=True,
+            width="stretch",
         )
 
     conflicts = data.get("conflicts", [])
 
     if conflicts:
         st.write("Konflikte:")
-        st.dataframe(conflicts, use_container_width=True)
+        st.dataframe(conflicts, width="stretch")
 
 def render_cancellation_status(artifact: dict) -> None:
     title = artifact.get("title", "Stornierbarkeit")

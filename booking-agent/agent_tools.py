@@ -443,48 +443,6 @@ TOOL_SCHEMAS = [
     },
     {
         "type": "function",
-        "name": "create_booking",
-        "description": "Erstellt eine Buchung für das Ferienhaus, wenn der gewünschte Zeitraum verfügbar ist.",
-        "parameters": {
-            "type": "object",
-            "properties": {
-                "guest_name": {
-                    "type": "string",
-                    "description": "Name des Gasts"
-                },
-                "guest_email": {
-                    "type": "string",
-                    "description": "E-Mail-Adresse des Gasts"
-                },
-                "start_date": {
-                    "type": "string",
-                    "description": "Anreisedatum im ISO-Format YYYY-MM-DD"
-                },
-                "end_date": {
-                    "type": "string",
-                    "description": "Abreisedatum im ISO-Format YYYY-MM-DD"
-                },
-                "guests": {
-                    "type": "integer",
-                    "description": "Anzahl Gäste"
-                },
-                "notes": {
-                    "type": "string",
-                    "description": "Optionale Notizen zur Buchung"
-                }
-            },
-            "required": [
-                "guest_name",
-                "guest_email",
-                "start_date",
-                "end_date",
-                "guests"
-            ],
-            "additionalProperties": False
-        }
-    },
-    {
-        "type": "function",
         "name": "get_current_date",
         "description": "Gibt das aktuelle Datum in der Zeitzone Europe/Zurich zurück.",
         "parameters": {
