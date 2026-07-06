@@ -116,7 +116,7 @@ def render_cancellation_status(artifact: dict) -> None:
             "Buchung stornieren",
             key=f"cancel_from_agent_{booking.get('booking_id', '')}",
             type="primary",
-            use_container_width=True,
+            width="stretch",
     ):
         st.session_state["pending_cancellation_booking"] = booking
         st.rerun()
@@ -169,7 +169,7 @@ def render_html_report(artifact: dict) -> None:
                         }
                         for source in sources
                     ],
-                    use_container_width=True,
+                    width="stretch",
                 )
 
     with st.expander("Report per E-Mail versenden"):
@@ -183,7 +183,7 @@ def render_html_report(artifact: dict) -> None:
         if st.button(
             "Report per E-Mail senden",
             key=f"send_report_email_{artifact_key}",
-            use_container_width=True,
+            width="stretch",
         ):
             try:
                 with st.spinner("Report wird per E-Mail versendet..."):
@@ -216,5 +216,5 @@ def render_external_link(artifact: dict) -> None:
     st.link_button(
         label,
         url,
-        use_container_width=True,
+        width="stretch",
     )

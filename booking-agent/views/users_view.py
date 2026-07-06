@@ -95,7 +95,7 @@ def render_user_list_section() -> None:
             for item in users
         ]
 
-        st.dataframe(visible_users, use_container_width=True)
+        st.dataframe(visible_users, width="stretch")
 
     except Exception as exc:
         st.error("Benutzer konnten nicht geladen werden.")

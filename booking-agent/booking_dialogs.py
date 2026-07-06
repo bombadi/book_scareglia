@@ -291,7 +291,7 @@ def cancellation_success_dialog() -> None:
             )
         )
 
-    if st.button("OK", type="primary", use_container_width=True):
+    if st.button("OK", type="primary", width="stretch"):
         st.session_state.pop("last_cancelled_booking", None)
         st.session_state.pop("last_cancellation_email_sent", None)
         st.session_state.pop("last_cancellation_email_message", None)
@@ -366,7 +366,7 @@ def edit_booking_dialog() -> None:
         if st.button(
             "Abbrechen",
             disabled=is_processing,
-            use_container_width=True,
+            width="stretch",
         ):
             st.session_state.pop("editing_booking", None)
             st.rerun()
@@ -376,7 +376,7 @@ def edit_booking_dialog() -> None:
             "Änderungen speichern",
             type="primary",
             disabled=is_processing,
-            use_container_width=True,
+            width="stretch",
         ):
             st.session_state[processing_key] = True
 
@@ -419,4 +419,4 @@ def edit_booking_dialog() -> None:
 
             if result.get("conflicts"):
                 st.write("Konflikte:")
-                st.dataframe(result["conflicts"], use_container_width=True)
+                st.dataframe(result["conflicts"], width="stretch")

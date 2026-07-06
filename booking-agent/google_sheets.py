@@ -1,5 +1,6 @@
 import json
 
+import google.auth
 import gspread
 from google.oauth2.service_account import Credentials
 
@@ -11,10 +12,13 @@ SCOPES = [
 
 
 def get_gspread_client():
-    credentials = Credentials.from_service_account_file(
-        GOOGLE_SERVICE_ACCOUNT_FILE,
-        scopes=SCOPES,
-    )
+    if GOOGLE_SERVICE_ACCOUNT_FILE:
+        credentials = Credentials.from_service_account_file(
+            GOOGLE_SERVICE_ACCOUNT_FILE,
+            scopes=SCOPES,
+        )
+    else:
+        credentials, _ = google.auth.default(scopes=SCOPES)
 
     return gspread.authorize(credentials)
 

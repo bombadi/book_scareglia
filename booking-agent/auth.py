@@ -200,7 +200,7 @@ def login_form() -> None:
 
             submitted = st.form_submit_button(
                 "Einloggen",
-                use_container_width=True,
+                width="stretch",
             )
 
         if submitted:
@@ -232,7 +232,7 @@ def login_form() -> None:
                 if st.button(
                     "Passwort vergessen?",
                     type="tertiary",
-                    use_container_width=True,
+                    width="stretch",
                     key="forgot_password_link",
                 ):
                     st.session_state["show_password_reset"] = True
@@ -253,7 +253,7 @@ def login_form() -> None:
 
                 reset_submitted = st.form_submit_button(
                     "Temporäres Passwort senden",
-                    use_container_width=True,
+                    width="stretch",
                 )
 
             if reset_submitted:

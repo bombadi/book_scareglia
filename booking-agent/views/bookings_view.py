@@ -11,7 +11,7 @@ def render_bookings_view() -> None:
     if st.button("Buchungen laden"):
         try:
             bookings = list_bookings(include_cancelled=include_cancelled)
-            st.dataframe(bookings, use_container_width=True)
+            st.dataframe(bookings, width="stretch")
 
         except Exception as exc:
             st.error("Buchungen konnten nicht geladen werden.")
