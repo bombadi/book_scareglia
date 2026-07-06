@@ -1,6 +1,7 @@
 import base64
 from email.message import EmailMessage
 
+import google.auth
 from google.oauth2.service_account import Credentials
 from googleapiclient.discovery import build
 
@@ -19,12 +20,15 @@ def get_gmail_service():
     if not GMAIL_SENDER_EMAIL:
         raise RuntimeError("Missing required environment variable: GMAIL_SENDER_EMAIL")
 
-    credentials = Credentials.from_service_account_file(
+    if GOOGLE_SERVICE_ACCOUNT_FILE:
+        credentials = Credentials.from_service_account_file(
         GOOGLE_SERVICE_ACCOUNT_FILE,
         scopes=GMAIL_SCOPES,
     )
 
-    delegated_credentials = credentials.with_subject(GMAIL_SENDER_EMAIL)
+        credentials = credentials.with_subject(GMAIL_SENDER_EMAIL)
+    else:
+        credentials, _ = google.auth.default(scopes=GMAIL_SCOPES)
 
     return build("gmail", "v1", credentials=delegated_credentials)
 
