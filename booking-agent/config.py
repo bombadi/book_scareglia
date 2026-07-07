@@ -20,4 +20,5 @@ OPENAI_API_KEY = get_required_env("OPENAI_API_KEY")
 TAVILY_API_KEY = get_optional_env("TAVILY_API_KEY")
 
 GMAIL_SENDER_EMAIL = get_optional_env("GMAIL_SENDER_EMAIL")
+GMAIL_FROM_EMAIL = get_optional_env("GMAIL_FROM_EMAIL")
 APP_BASE_URL = get_optional_env("APP_BASE_URL", "http://localhost:8501")

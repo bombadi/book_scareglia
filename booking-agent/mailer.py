@@ -8,6 +8,7 @@ from googleapiclient.discovery import build
 from config import (
     APP_BASE_URL,
     GMAIL_SENDER_EMAIL,
+    GMAIL_FROM_EMAIL,
     GOOGLE_SERVICE_ACCOUNT_FILE,
 )
 
@@ -42,7 +43,7 @@ def send_email(
     message = EmailMessage()
 
     message["To"] = to_email
-    message["From"] = GMAIL_SENDER_EMAIL
+    message["From"] = GMAIL_FROM_EMAIL
     message["Subject"] = subject
 
     if body_html:
