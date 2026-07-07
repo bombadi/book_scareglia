@@ -18,6 +18,7 @@ GMAIL_SCOPES = [
 ]
 
 
+
 def get_gmail_service():
     if GOOGLE_SERVICE_ACCOUNT_FILE:
         credentials = Credentials.from_service_account_file(
