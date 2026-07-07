@@ -7,9 +7,10 @@ from googleapiclient.discovery import build
 
 from config import (
     APP_BASE_URL,
-    GMAIL_SENDER_EMAIL,
+    GMAIL_USER_EMAIL,
     GMAIL_FROM_EMAIL,
     GOOGLE_SERVICE_ACCOUNT_FILE,
+    GOOGLE_SERVICE_ACCOUNT_EMAIL,
 )
 
 GMAIL_SCOPES = [
@@ -18,18 +19,22 @@ GMAIL_SCOPES = [
 
 
 def get_gmail_service():
-    if not GMAIL_SENDER_EMAIL:
-        raise RuntimeError("Missing required environment variable: GMAIL_SENDER_EMAIL")
-
     if GOOGLE_SERVICE_ACCOUNT_FILE:
         credentials = Credentials.from_service_account_file(
             GOOGLE_SERVICE_ACCOUNT_FILE,
-        scopes=GMAIL_SCOPES,
-    )
-
-        credentials = credentials.with_subject(GMAIL_SENDER_EMAIL)
+            scopes=GMAIL_SCOPES,
+        ).with_subject(GMAIL_USER_EMAIL)
     else:
-        credentials, _ = google.auth.default(scopes=GMAIL_SCOPES)
+        source_credentials, _ = google.auth.default(
+            scopes=["https://www.googleapis.com/auth/cloud-platform"]
+        )
+
+        credentials = impersonated_credentials.Credentials(
+            source_credentials=source_credentials,
+            target_principal=GOOGLE_SERVICE_ACCOUNT_EMAIL,
+            target_scopes=GMAIL_SCOPES,
+            subject=GMAIL_USER_EMAIL,
+        )
 
     return build("gmail", "v1", credentials=credentials)
 
